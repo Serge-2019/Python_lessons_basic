@@ -5,12 +5,11 @@
 # Для решения задачи не используйте встроенные функции и функции из модуля math.
 
 def my_round(number, ndigits):
-    pass
+    num = number * (10 ** (ndigits + 1))
+    return (num // 10 + int(num % 10 > 5)) / (10 ** ndigits)
 
-
-print(my_round(2.1234567, 5))
-print(my_round(2.1999967, 5))
-print(my_round(2.9999967, 5))
+for i in [2.1234567, 2.1999967, 2.9999967, 2.1234547, 2.9999167]:
+    print("source= {}, my= {}, round= {}".format(i, my_round(i, 5), round(i, 5)))
 
 
 # Задание-2:
@@ -20,9 +19,14 @@ print(my_round(2.9999967, 5))
 # !!!P.S.: функция не должна НИЧЕГО print'ить
 
 def lucky_ticket(ticket_number):
-    pass
+    s = str(ticket_number)
+    i = len(s) // 2
+    first = sum(map(lambda x: int(x), s[:i]))
+    last = sum(map(lambda x: int(x), s[-i:]))
+    return "Счастливый билет" if first == last else "Несчастливый билет"
 
 
 print(lucky_ticket(123006))
 print(lucky_ticket(12321))
 print(lucky_ticket(436751))
+print(lucky_ticket(496751))
